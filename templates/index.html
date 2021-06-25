@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% import 'macros.html' as macros %}
+
+{% block title %} Start {% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+    </div>
+    <div class="col-sm-9">
+      {{ macros.page_header( data['header'] ) }}
+      <h3>Your work request is submitted</h3>
+      <form method="post" class="form-horizontal">
+        {{ form.hidden_tag() }}
+        <div class="form-group row">
+          <h3>Click on Trigger another one.</h3>
+          {{ macros.prev_next_buttons(next="true") }}
+        </div>
+      </form>
+    </div>
+    <div class="col-sm-5">
+    </div>
+  </div>
+</div>
+{% endblock %}

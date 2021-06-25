@@ -1,0 +1,194 @@
+{# this modification is for radio field rendering using bootstrap 4 #}
+{# start radio field modification #}
+{% macro radio_field(name, value='', text='', selected="") -%}
+  <div class="form-check form-check-inline">
+    <label class="form-check-label">
+      <input class="form-check-input" type="radio" name="{{ name }}" value="{{ value|e }}"> {{ text }}
+    </label>
+  </div>
+{%- endmacro %}
+{# end radio field modification #}
+
+
+{# this modification is for text field rendering using bootstrap 4 #}
+{# start text field modification #}
+{%- macro text_field(name, id, value='', text='') -%}
+  <label for="{{ id }}" class="col-sm-3 col-form-label"> {{ text }}</label>
+  <div class="col-sm-6">
+    <input class="form-control" type="text" id="{{ id }}" name="{{ name }}" value="{{ value | e }}">
+  </div>
+{%- endmacro %}
+{# end text field modification #}
+
+
+{# this modification is for text field rendering using bootstrap 4 #}
+{# start text field modification #}
+{%- macro text_field_required(name, id, value='', text='') -%}
+  <label for="{{ id }}" class="col-sm-3 col-form-label"> {{ text }}</label>
+  <div class="col-sm-6">
+    <input class="form-control" type="text" id="{{ id }}" name="{{ name }}" value="{{ value | e }}" required>
+  </div>
+{%- endmacro %}
+{# end text field modification #}
+
+
+{# this modification is for page header rendering using bootstrap 4 #}
+{# start page header modification #}
+{%- macro page_header(text='') -%}
+  <br />
+  <div class="page-header">
+    <h2>{{ text }}</h2>
+  </div>
+  <br />
+{%- endmacro %}
+{# end page header modification #}
+
+
+{# This modification is for select box rendering using bs4 #}
+{%- macro select_field(name, id, choices) %}
+  <div class="col-sm-6">
+    <select class="form-control" id="{{ id }}" name="{{ name }}">
+      {% for choice in choices %}
+        <option value="{{ choice[0] }}"> {{ choice[1] }} </option>
+      {% endfor %}
+    </select>
+  </div>
+{%- endmacro %}
+
+
+{# This modification is for multi select box rendering using bs4 #}
+{%- macro multi_select_field(name, id, choices, class_="") %}
+  <div class="col-sm-6">
+    <select multiple class="form-control {{ class_ }}" id="{{ id }}" name="{{ name }}">
+      {% for choice in choices %}
+        <option value="{{ choice[0] }}"> {{ choice[1] }} </option>
+      {% endfor %}
+    </select>
+  </div>
+{%- endmacro %}
+
+
+{# This modification is for select box rendering using bs4 #}
+{%- macro required_select_field(name, id, choices) %}
+  <div class="col-sm-6">
+    <select class="form-control" id="{{ id }}" name="{{ name }}" required>
+      {% for choice in choices %}
+        <option value="{{ choice[0] }}"> {{ choice[1] }} </option>
+      {% endfor %}
+    </select>
+  </div>
+{%- endmacro %}
+
+
+{# This modification is for multi select box rendering using bs4 #}
+{%- macro required_multi_select_field(name, id, choices, class_="") %}
+  <div class="col-sm-6">
+    <select multiple class="form-control {{ class_ }}" id="{{ id }}" name="{{ name }}" required>
+      {% for choice in choices %}
+        <option value="{{ choice[0] }}"> {{ choice[1] }} </option>
+      {% endfor %}
+    </select>
+  </div>
+{%- endmacro %}
+
+
+{# this modification is for displaying front back buttons #}
+{%- macro prev_next_buttons(prev='', next='', submit_text="") -%}
+  {% if prev %}
+    <div class="col-sm-6 text-left">
+      <button class="btn btn-primary" type="submit" name="submit" value="back" formnovalidate>Back</button>
+    </div>
+  {% endif %}
+  {% if next %}
+    <div class="col-sm-6 pull-right">
+      {% if submit_text %}
+        <button class="btn btn-primary" type="submit" name="submit" value="next"> {{ submit_text }} </button>
+      {% else %}
+        <button class="btn btn-primary" type="submit" name="submit" value="next">Proceed</button>
+      {% endif %}
+    </div>
+  {% endif %}
+{%- endmacro %}
+
+
+{# this modification is for text field rendering using bootstrap 4 #}
+{# start text field modification #}
+{%- macro password_field_required(name, id, value='', text='') -%}
+  <label for="{{ id }}" class="col-sm-6 col-form-label"> {{ text }}</label>
+  <div class="col-sm-6">
+    <input class="form-control" type="password" id="{{ id }}" name="{{ name }}" value="{{ value | e }}" required>
+  </div>
+{%- endmacro %}
+{# end text field modification #}
+
+{# this modification is for page header rendering using bootstrap 4 #}
+{# start page header modification #}
+{%- macro page_header_small(text='') -%}
+  <br />
+  <div class="page-header">
+    <h5>{{ text }}</h5>
+  </div>
+  <br />
+{%- endmacro %}
+{# end page header modification #}
+
+
+{%- macro show_field(field, data_type, label) -%}
+  {% if session[data_type][field] is iterable and session[data_type][field] is not string %}
+    <span class="yaml_key"> {{ label }} </span>
+    <ul>
+      {% for value in session[data_type][field] %}
+        <li>{{ value }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <li><span class="yaml_key"> {{ label }} </span><span class="yaml_key_sep">:</span> {{ session[data_type][field] }} </li>
+  {% endif%}
+{%- endmacro %}
+
+
+
+{%- macro show_session_data() -%}
+  {% if session["first"] %}
+    <h6>First Page</h6>
+    <ul>
+      {% for field in session["first"] %}
+        {{ show_field(field, "first") }}
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  {% if session["second"] %}
+    <h6>Second Page</h6>
+    <ul>
+      {% for field in session["second"] %}
+        {{ show_field(field, "second") }}
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  {% if session["third"] %}
+    <h6>Third Page</h6>
+    <ul>
+      {% for field in session["third"] %}
+        {{ show_field(field, "third") }}
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+{%- endmacro%}
+
+
+{%- macro show_field(data="") -%}
+  {% if data %}
+    <span class="yaml_key"> {{ label }} </span>
+    <ul>
+      {% for value in session[data_type][field] %}
+        <li>{{ value }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <li><span class="yaml_key"> {{ label }} </span><span class="yaml_key_sep">:</span> {{ session[data_type][field] }} </li>
+  {% endif%}
+{%- endmacro %}
+

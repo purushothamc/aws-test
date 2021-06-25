@@ -1,0 +1,84 @@
+<!doctype html>
+
+<html lang="en">
+{% block head %}
+
+<title>{% block title %} {% endblock %} - Automation UI</title>
+
+<!-- meta -->
+<meta charset="utf-8">
+<meta name="description" content="front end scheduler for new automation UI">
+<meta name="author" content="automation team">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- /meta -->
+
+<!-- styles -->
+<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+<!-- data picker css -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+<!-- data table css -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowgroup/1.1.0/css/rowGroup.dataTables.min.css"/>
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/rowgroup/1.1.0/js/dataTables.rowGroup.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+{% endblock %}
+
+<body>
+  <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+
+    <div class="navbar-nav-scroll">
+    <ul class="navbar-nav bd-navbar-nav flex-row">
+      <li class="nav-item">
+        <a class="nav-link " href="/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Bootstrap');">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/4.0/getting-started/introduction/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Docs');">Scheduler a WR</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="/docs/4.0/examples/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Examples');">Reports</a>
+      </li>
+    </ul>
+  </div>
+  </header>
+  
+<div id="content"> {% block content %}{% endblock %} </div>
+<div class="container-fluid">
+  {% for message in get_flashed_messages() %}
+  <div class="alert alert-warning">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {{ message }}
+  </div>
+  {% endfor %}
+
+  {% block page_content %}
+  {% endblock %} <!-- end page_content block -->
+</div>
+
+<!--<footer class="footer">
+  <div class="container">
+    <span class="text-muted">Digital Guardian 2018 &copy; All Rights Reserved.</span>
+  </div>
+</footer>-->
+
+
+{% block scripts %}
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+{% endblock %}
+
+</body>
+</html>

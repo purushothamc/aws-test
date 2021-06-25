@@ -1,0 +1,38 @@
+  {% extends "base.html" %}
+  {% import 'macros.html' as macros %}
+  
+  {% block title %} Start {% endblock %}
+  
+  {% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3">
+        <ul class="nav nav-tabs flex-column ">
+        </ul>
+      </div>
+      <div class="col-sm-9">
+        {{ macros.page_header( data['header'] ) }}
+        <form method="post" class="form-horizontal">
+          {{ form.hidden_tag() }}
+          
+          <div class="form-group row">
+            {% set default_text = form.textfield.default %}
+            {{ macros.text_field("textfield", "textfield", default_text, "Enter Some Text") }}
+          </div>
+          
+          <div class="form-group row">
+            {% set default_text = form.selectfield.default %}
+            <label for="agent_version" class="col-sm-3 col-form-label">Select an Option</label>
+            {{ macros.select_field("selectfield", "selectfield", form.selectfield.choices) }}
+          </div>
+          
+          <div class="form-group row">
+            {{ macros.prev_next_buttons(next="true", submit_text="Generate JSON & Trigger WR") }}
+          </div>
+        </form>
+      </div>
+      <div class="col-sm-5">
+      </div>
+    </div>
+  </div>
+  {% endblock %}
