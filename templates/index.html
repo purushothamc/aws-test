@@ -10,11 +10,11 @@
     </div>
     <div class="col-sm-9">
       {{ macros.page_header( data['header'] ) }}
-      <h3>Your work request is submitted</h3>
+      <h3>You've selected OS: {{ session["first"]["selectfield"] }}</h3>
+      <h3>Click on Proceed to Create EC2 Instance.</h3>
       <form method="post" class="form-horizontal">
         {{ form.hidden_tag() }}
         <div class="form-group row">
-          <h3>Click on Trigger another one.</h3>
           {{ macros.prev_next_buttons(next="true") }}
         </div>
       </form>

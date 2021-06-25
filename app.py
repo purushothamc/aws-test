@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect, session, jsonify
+from flask import Flask, render_template, request, url_for, redirect, session, jsonify, flash
 from forms import *
 from flask_session import Session
 import json
@@ -80,6 +80,7 @@ def second():
         wrid = send_data_to_wr()
         print(session)
         session.clear()
+        flash("Your request is submitted !!")
         return redirect("/")
     return render_template("index.html", form=sform, data=data)
 
